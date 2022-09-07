@@ -21,7 +21,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/json", (req, res) => {
-  res.json({ message: process.env.MESSAGE_STYLE });
+  if (process.env.MESSAGE_STYLE === "UPPERCASE") {
+    response = "Hello json".toUpperCase();
+  } else {
+    response = "Hello json";
+  }
+  res.json({ message: response });
 });
 
 app.get(
@@ -40,7 +45,7 @@ app.get("/:word/echo", (req, res) => {
   res.json({ echo: word });
 });
 
-app.get.post("/name", (req, res) => {
+app.get("/name", (req, res) => {
   const { first, last } = req.query;
   res.json({ name: `${first} ${last}` });
 });
